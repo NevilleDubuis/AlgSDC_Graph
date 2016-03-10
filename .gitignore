@@ -1,0 +1,3 @@
+bin/*.o
+Graph
+.DS_Store
