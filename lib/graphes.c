@@ -62,9 +62,13 @@ int afficheGraphe(idGraph *pGraphe)
     for (i=0;i<pGraphe->nbSommets;i++) printf( "%2c ",NOM_SOMMET(i)); // affiche de l'entête du tableau avec la liste des noeuds
     printf("\n");
 
-
-    // a compléter ....
-
+    for (i = 0; i < pGraphe->nbSommets; i++) {
+      printf( "Sommet   %c :",NOM_SOMMET(i));
+      for (j = 0; j < pGraphe->nbSommets; j++) {
+        printf("%2d ", pGraphe->matrice[i][j]);
+      }
+      printf("\n");
+    }
 
     return(0);
 }
