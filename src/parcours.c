@@ -8,6 +8,8 @@
 
 #include <stdio.h>
 #include <stdlib.h>
+#include <ctype.h>
+#include <string.h>
 
 #include "../lib/utils.h"
 #include "../lib/graphes.h"
@@ -34,10 +36,28 @@ void dfs_r(idGraph *pGraphe, int sommet)
     idElt element;
     int nbAdjacents;
 
+    visited[sommet]=true;
 
-    // a compléter ....
+    printf("  On visite : %C\n",NOM_SOMMET(sommet));
 
+    nbAdjacents=nbElements(pGraphe->listeAdj[sommet]); // nb sommets adjacents au courant
 
+    if (nbAdjacents) { // S'il y a des sommets adjacents
+
+        // on prend le premier sommet adjacent et s'il n'a pas été visite, on le visite
+        element=premierElt(pGraphe->listeAdj[sommet]);
+
+        while(nbAdjacents--) {
+
+            sommet=VAL_SOMMET(element);
+
+            if(!visited[sommet]) // si non visité, on le visite
+                dfs_r(pGraphe, sommet);
+
+            // puis on passe au sommet voisin
+            element=suivantElt(element);
+        }
+    }
 }
 
 /* ---------------------------------------------------------
@@ -53,12 +73,18 @@ void dfs_r(idGraph *pGraphe, int sommet)
  */
 int dfs(idGraph * pGraphe)
 {
+    int i;
 
-    for (int i = 0; i<pGraphe->nbSommets;i++) visited[i]=false;
+    for (i = 0; i<pGraphe->nbSommets;i++) visited[i]=false;
 
     afficheBanniere("Parcours en profondeur depuis le sommet A");
+    pGraphe->nbComposantesConnexes=0;
 
-    dfs_r(pGraphe, 0);
-
+    for (i = 0; i<pGraphe->nbSommets;i++)
+        if (!visited[i]) {
+            printf("On visite le graphe depuis le sommet %c\n", NOM_SOMMET(i));
+            pGraphe->nbComposantesConnexes++;
+            dfs_r(pGraphe, i);
+        }
     return(0);
 }

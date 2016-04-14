@@ -37,6 +37,8 @@
 
 #include <stdio.h>
 #include <stdlib.h>
+#include <ctype.h>
+#include <string.h>
 
 #include "../lib/utils.h"
 #include "../lib/graphes.h"
@@ -49,8 +51,8 @@
 
 
 static typeMenu menuPrincipal[] = {
-    { "Gestion d'un graphe (création, affichage, gestion de sommets et arêtes)", &gererGraphe },
-    { "Caracteristiques du graphe (ordre, eulérien, connexe, complet, etc..)", &fnVide },
+    { "Gestion d'un graphe ", &gererGraphe },
+    { "Caracteristiques du graphe ", &fnVide },
     { "Coloration du graphe", &fnVide },
     { "Parcours en profondeur", &dfs },
     { "Parcours en largeur", &fnVide },
@@ -73,9 +75,9 @@ int main(void)
     int choix=0, erreur=0;
     idGraph *pGraphe;
 
-    afficheBanniere("Bienvenue dans la the9orie des graphes !!");
+    afficheBanniere("Bienvenue dans mon programme de theorie des graphes !!");
 
-    printf("\n");
+    printf("\n\n\n");
 
     pGraphe = creerDefaultGraphe(); // initialisation du graphe par défaut
 
@@ -95,8 +97,6 @@ int main(void)
 
 
         } while (choix != 0 && erreur == 0); /* tant qu'on n'a pas demandé a sortir (choix 0) on réaffiche le menu) */
-
-        detruireGraphe(pGraphe);
     } else {
         printf("erreur de création du graphe par défaut\n");
     }

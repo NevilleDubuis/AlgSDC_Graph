@@ -10,6 +10,8 @@
 
 #include <stdio.h>
 #include <stdlib.h>
+#include <ctype.h>
+#include <string.h>
 
 #include "utils.h"
 
@@ -37,7 +39,7 @@ static char accueil[5][100] = {
 int fnVide()
 {
     printf("\n\nFonction pas encore implémentée !!!! \n\n");
-
+    
     return(0);
 }
 
@@ -53,29 +55,29 @@ int fnVide()
 int afficheBanniere(char *chaine)
 {
     int i, nb_espaces;
-
+    
     for (i = 0; i < 2; i++) printf("%s\n", accueil[i]);
-
-
+    
+    
     // on affiche le texte de la bannière en la centrant
     // dans le cadre = calculdu nombre d'espaces avant et après
     // en tenant compte de la longueur impaire du texte
-
-    nb_espaces = (strlen(accueil[0]) - strlen (chaine))/2-1;
-
+ 
+    nb_espaces = (int) (strlen(accueil[0]) - strlen (chaine))/2-1;
+    
     printf("*");
     for (i=0;i<nb_espaces;i++) printf(" "); // espaces avant
-
+    
     printf("%s", chaine);
-
+    
     for (i=0;i<nb_espaces;i++) printf(" "); // espaces après
     if (strlen(chaine)&1) printf(" "); // cas de longueur impaire
-
+    
     printf("*\n");
-
+    
     for (i = 3; i < 5; i++) printf("%s\n", accueil[i]);
     printf("\n");
-
+    
     return(0);
 }
 
@@ -99,13 +101,13 @@ int afficheMenu(typeMenu * pMenu)
 
     do {
         printf("\nEntrez votre choix (0 pour quitter ce menu) : ");
-
+        
         choix = saisieEntier();
 
         if (choix > i || choix < 0)
             printf("\n!! -------> un nombre compris entre 0 et %d, svp !!\n", i );
     } while (choix >i || choix < 0);
-
+    
     return(choix);
 }
 
@@ -122,7 +124,7 @@ int saisieEntier()
 {
     int n, val;
     char ligne[100];
-
+    
     fgets(ligne, 100, stdin);
     n = sscanf(ligne, "%d", &val);
     while (n != 1) {
@@ -145,7 +147,7 @@ char saisieCaractere()
 {
     int n;char val;
     char ligne[100];
-
+    
     fgets(ligne, 100, stdin);
     n = sscanf(ligne, "%c", &val);
     while ((n != 1) || (val <'A') || (val>'Z')) {
@@ -155,3 +157,4 @@ char saisieCaractere()
     }
     return (val);
 }
+

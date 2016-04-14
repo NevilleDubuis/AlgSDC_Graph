@@ -14,7 +14,7 @@
 // on stocke dans la file le numero de sommet et le poids dans la référence objet
 #define VAL_SOMMET(n) ((int)valElt(n) & 0x00ff)
 #define VAL_POIDS(n) (((int)valElt(n) & 0xff00)>>8)
-#define REF_OBJET(s,p) ((void *) ((s&0x00ff) + ((p<<8)&0xff00)))
+#define REF_OBJET(s,p) ((refObjet) ((s&0x00ff) + ((p<<8)&0xff00)))
 
 
 // Structure descriptive d'un graphe
@@ -38,7 +38,7 @@ extern idGraph * creerGraphe(); // création d'une structure de type graphe
 extern void detruireGraphe(); // destruction de la structure graphe
 
 extern int creerArete(); // Création d'un arete dans un graphe existant
-extern void detruireArete(); // suppression d'une arete
+extern int detruireArete(); // suppression d'une arete
 
 extern int gererGraphe(); // gestion des aretes et sommets d'un graphe
 extern int afficheGraphe(); // affichage matrice et liste d'adjacenec

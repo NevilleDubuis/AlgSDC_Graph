@@ -1,6 +1,8 @@
 /* Listedble.c */
 #include <stdio.h>
 #include <stdlib.h>
+#include <ctype.h>
+#include <string.h>
 
 typedef void * typeObjet;
 
@@ -24,9 +26,9 @@ typedef struct LH {     // LH comme Liste Header
 /* Creer un descripteur de liste pour une nouvelle liste */
 typeListe * creerListe () {
     typeListe * ptListe;
-
+    
     ptListe = (typeListe *) malloc(sizeof(typeListe));
-
+    
     if (ptListe != NULL) {
         ptListe->premier = NULL;
         ptListe->dernier = NULL;
@@ -72,9 +74,9 @@ typeElt *precedentElt (typeElt *courant) {
 /* Insre l'ŽlŽment nouveau dans la liste aprs le courant */
 // Insre en premier quand courant == NULL
 void insereElt (typeListe *ptListe, typeElt *courant, typeElt *nouveau) {
-
+    
     ptListe->nbElt++;
-
+    
     if (ptListe->premier != NULL) {
         // la liste n'est pas vide
         if (courant == NULL) {
@@ -98,7 +100,7 @@ void insereElt (typeListe *ptListe, typeElt *courant, typeElt *nouveau) {
     nouveau->suivant = courant->suivant;
     (courant->suivant)->precedent = nouveau;
     courant->suivant = nouveau;
-
+    
 }
 
 /* Enlever l'ŽlŽment courant de la liste passŽe en paramtre */
@@ -128,7 +130,7 @@ void enleverElt (typeListe *ptListe, typeElt *courant) {
         (courant->precedent)->suivant = courant->suivant;
         (courant->suivant)->precedent = courant->precedent;
     }
-
+    
     // on rŽ-initialise l'ŽlŽment enlevŽ pour pointer sur lui-mme
     courant->precedent = courant;
     courant->suivant = courant;
@@ -155,3 +157,5 @@ void detruireListe (typeListe *ptListe) {
     }
     free(ptListe);
 }
+
+

@@ -93,7 +93,7 @@ int acpm(idGraph *pGraphe)
     // et c'est fini !!
 
 
-    printf("Arbre de poids couvrant minimum, poids = %d\n", poidsArbre);
+    printf("Arbre couvrant de poids minimum, poids total = %d\n", poidsArbre);
 
     afficheGraphe(pGrapheACPM);
 
@@ -136,7 +136,9 @@ static void swapAretes(int a1, int a2)
  */
 static void joindreComposantesConnexes(int c1, int c2)
 {
-    for (int i=0; i<MAX_S;i++)
+    int i;
+
+    for (i=0; i<MAX_S;i++)
         if (composanteConnexe[i]==c2)
             composanteConnexe[i]=c1;
 
